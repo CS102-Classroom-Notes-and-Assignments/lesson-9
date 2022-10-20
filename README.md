@@ -2,10 +2,11 @@
 
 ## COMMAND LINE ARGUMENTS
 Pass command-line arguments or parameters to a program when it begins executing:
-argc - argument count, the number of command line argos it was invoked with
-argv - argument vector, pointer to an array of character strings that contain the arguments
-argv[0] is the name by which the program was invoked, so argc is at least 1.
-Standard requires that argv[argc] be a null pointer.
+
+- argc - argument count, the number of command line argos it was invoked with
+- argv - argument vector, pointer to an array of character strings that contain the arguments
+	- argv[0] is the name by which the program was invoked, so argc is at least 1.
+	- Standard requires that argv[argc] be a null pointer.
 
 Simplest example is the program echo. echo hello, world, prints out hello, world.
 
