@@ -8,7 +8,10 @@ Pass command-line arguments or parameters to a program when it begins executing:
 	- argv[0] is the name by which the program was invoked, so argc is at least 1.
 	- Standard requires that argv[argc] be a null pointer.
 
-Simplest example is the program echo. echo hello, world, prints out hello, world.
+Simplest example is the program echo. ```echo hello, world```, prints out hello, world.
+
+<img src="pic1.png" width="400">
+
 
 #### ARGV EXAMPLE
 ```c
