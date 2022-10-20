@@ -53,10 +53,10 @@ int main(int argc, char *argv[])
 How would you make this include the ./a?
 
 ## GREP
-Prints out any line that has the pattern you're looking for.
-```$./a.exe a < grep.c```
+- Prints out any line that has the pattern you're looking for.
+- ```$./a.exe a < grep.c```
+- The standard library function strstr(s, t) returns a pointer to the first occurrence of the string t in the string s, or NULL if there is none. It is declared in <string.h>
 
-The standard library function strstr(s, t) returns a pointer to the first occurrence of the string t in the string s, or NULL if there is none. It is declared in <string.h>
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -100,11 +100,15 @@ int mygetline(char s[], int lim)
 ```
 
 ## FIND
-Common convention for C programs on UNIX systems is that an argument that begins with a minus sign introduces an optional flag or parameter. 
-If we chose -x (print all lines except those that match the pattern) and -n (print each line preceded by its line number)
-./a.exe -n while < find.c
-Optional arguments should be permitted in any order. Furthermore, it is convenient for users if optional arguments can be combined as in: -nx
-In the program below, notice that *argv points to the pattern. *++argv is a pointer to an argument string, so (*++argv)[0] is its first character. An alternate valid form would be **++argv. Brackets[] have higher precedence, so *++argv[0] is a different expression that walks along a specific argument string.*++argv[0] is the same as *++(argv[0]).
+- Common convention for C programs on UNIX systems is that an argument that begins with a minus sign introduces an optional flag or parameter. 
+	- If we chose ```-x``` (print all lines except those that match the pattern) and ```-n``` (print each line preceded by its line number)
+		- ```./a.exe -n while < find.c```
+	- Optional arguments should be permitted in any order. Furthermore, it is convenient for users if optional arguments can be combined as in: ```-nx```
+- In the program below, notice that ```*argv``` points to the pattern. ```*++argv``` is a pointer to an argument string, so ```(*++argv)[0]``` is its first character. An alternate valid form would be ```**++argv```. Brackets[] have higher precedence, so ```*++argv[0]v is a different expression that walks along a specific argument string. ```*++argv[0]``` is the same as ```*++(argv[0])```.
+
+<img src="pic2.png" width="400">
+
+<img src="pic3.png" width="400">
 
 ```c
 #include <stdio.h>
@@ -179,20 +183,20 @@ int mygetline(char s[], int lim)
 }
 ```
 
-## Pointers to Functions
-Function is not a variable, but it is possible to define pointers to functions, which can be assigned, placed in arrays, passed to functions, returned by functions, and so on.
+### Pointers to Functions
+- Function is not a variable, but it is possible to define pointers to functions, which can be assigned, placed in arrays, passed to functions, returned by functions, and so on.
 
 #### Sorting algo:
-Comparison function - determines ordering of any pair
-We can interchange this based on the type of sort we want
-Exchange function - reverses order of any pair
-We can interchange this based on the object we are comparing
-Sorter - compares and echanges until the objects are in order
+1. Comparison function - determines ordering of any pair
+	- We can interchange this based on the type of sort we want
+2. Exchange function - reverses order of any pair
+	- We can interchange this based on the object we are comparing
+3. Sorter - compares and echanges until the objects are in order
 
 If we wanted to switch out the comparison function based on the command line arguments, we can use a pointer to the different functions.
 
-In the example below, we are interchanging a number comparison and a string comparison. Any pointer can be cast to (void *) and back again without loss of information, so we can call qsort by casting arguments to void *. The elaborate cast of the function argument casts the arguments of the comparison function. These will generally have no effect on actual representation, but assure the compiler that all is well. 
-int (*comp) (void*, void*) says that comp is a pointer to a function that has two void * arguments and returns an int. The parentheses are important as if we wrote int *comp(void*, void *) it means comp is a function returning a pointer ro an int.
+In the example below, we are interchanging a number comparison and a string comparison. Any pointer can be cast to ```(void *)``` and back again without loss of information, so we can call qsort by casting arguments to void *. The elaborate cast of the function argument casts the arguments of the comparison function. These will generally have no effect on actual representation, but assure the compiler that all is well. 
+- ```int (*comp) (void*, void*)``` says that comp is a pointer to a function that has two void * arguments and returns an int. The parentheses are important as if we wrote ```int *comp(void*, void *)``` it means comp is a function returning a pointer to an ```int```.
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -268,10 +272,10 @@ void swap(void *v[], int i, int j;){
 
 ## BASICS OF STRUCTURES
 Structure - is a collection of one or more variables, possible of different types, grouped together under a single name for convenient handling.
-Structures help organize complicated data, particularly in large programs, because they permit a group of related variables to be treated as a unit instead of separate entities
-Examples: 
-payroll record for an employee, can have a struct with attributes name, address, social security number, salary, etc. Each one of these attributes can be a struct too as ‘name’ has attributes such as first and last.
-A point is a pair of coordinates, a rectangle is a pair of points, etc.
+	- Structures help organize complicated data, particularly in large programs, because they permit a group of related variables to be treated as a unit instead of separate entities
+	- Examples: 
+		- payroll record for an employee, can have a struct with attributes name, address, social security number, salary, etc. Each one of these attributes can be a struct too as ‘name’ has attributes such as first and last.
+		- A point is a pair of coordinates, a rectangle is a pair of points, etc.
 ```c
 struct point {
 	int x;
@@ -280,11 +284,11 @@ struct point {
 ```
 
 #### Structure components:
-The keyword struct introduces a structure declaration, which is a list of declarations enclosed in braces.
-An optional name called a structure tag may follow the word struct (such as point in the example above). 
-The variables named in a structure are called members.
+	- The keyword struct introduces a structure declaration, which is a list of declarations enclosed in braces.
+	- An optional name called a structure tag may follow the word struct (such as point in the example above). 
+	- The variables named in a structure are called members.
 
- A structure declaration that is not followed by a list of variables reserves no storage; it merely describes a template or shape of a structure. If the declaration is tagged, the tag can be used later in definitions of instances of the structure.
+A structure declaration that is not followed by a list of variables reserves no storage; it merely describes a template or shape of a structure. If the declaration is tagged, the tag can be used later in definitions of instances of the structure.
 struct point pt;
 Defines a variable pt which is a structure of type struct point.
 
@@ -292,7 +296,8 @@ The structure can be initialized by following its definition with a list of init
 struct maxpt = {320, 200};
 
 #### POINT EXAMPLE
-Structs basically allow you to create your own complex type.
+- Structs basically allow you to create your own complex type.
+
 ```c
 #include <stdio.h>
 #include <math.h>
@@ -316,7 +321,7 @@ int main()
 ```
 
 #### RECTANGLE EXAMPLE
-Shows us that structures can be nested
+	- Shows us that structures can be nested
 ```c
 #include <stdio.h>
 
@@ -347,15 +352,15 @@ int main()
 
 #### STRUCTURES AND FUNCTIONS
 The only legal operations on a structure are:
-copying it
-assigning to it as a unit
-taking its address with &
-accessing its members.
+1. copying it
+2. assigning to it as a unit
+3. taking its address with &
+4. accessing its members.
 
 
 #### POINTER EXAMPLES
-makepoint() takes two integers and returns a point structure
-The returned value is used to initialize any structure dynamically
+- makepoint() takes two integers and returns a point structure
+	- The returned value is used to initialize any structure dynamically
 ```c
 #include <stdio.h>
 #include <math.h>
@@ -401,8 +406,8 @@ int main()
 ```
 
 #### RECT FUNCTIONS
-Note the #define for min and max
-Canonicalization = making consistent
+	- Note the #define for min and max
+	- Canonicalization = making consistent
 ```c
 #include <stdio.h>
 #include <math.h>
@@ -484,8 +489,10 @@ int main()
  
 ## STRUCTS & PTRS
 If a large structure is to be passed to a function, it is generally more efficient to pass a pointer than to copy the whole structure. Structure pointers are just like pointers to ordinary variables. The declaration 
-struct point *pp;
-Says that pp is a pointer to a structure of type struct point. If pp points to a point structure, *pp is the structure, and (**p) .x and (*pp).y are the members. 
+
+```struct point *pp;```
+
+Says that pp is a pointer to a structure of type struct point. If pp points to a point structure, ```*pp``` is the structure, and ```(**p).x``` and ```(*pp).y``` are the members. 
 Pointers to structures are so frequently used that an alternative notation is provided as shorthand. If p is a pointer to a structure, then p-> member-of-structure refers to the particular member.
 ```c
 #include <stdio.h>
@@ -536,7 +543,7 @@ int len;
 char *str;
 } *p;
 ```
-Then, ++p -> len increments len, not p, because the implied parenthesization is ++(p->len). In the same way, *p->str fetches whatever str points to; *p->str++ increments str after accessing whatever it points to (just like *s++); (*p->str)++ increments whatever str points to; and *p++->str increments p after accessing whatever str points to.
+Then, ```++p -> len``` increments ```len```, not ```p```, because the implied parenthesization is ```++(p->len)```. In the same way, ```*p->str``` fetches whatever str points to; v*p->str++``` increments str after accessing whatever it points to (just like ```*s++```); ```(*p->str)++``` increments whatever ```str``` points to; and ```*p++->str``` increments ```p``` after accessing whatever ```str``` points to.
 ```c
 #include <stdio.h>
  
@@ -576,13 +583,14 @@ int main()
 }
 ```
 
-Be careful with pointers!!!
+- Be careful with pointers!!!
 
 ## ARRAYS OF STRUCTURES
  Program to count the occurrences of each C keyword:
-What data do we need to store?
-How should we store this data?
+	- What data do we need to store?
+	- How should we store this data?
 Perhaps as a struct like shown below?
+
 ```c
 struct key {
 	char *word;
@@ -591,9 +599,10 @@ struct key {
 ```
 
 #### DECLARATIONS
-We use an array of structs below, and initialize it when it is defined as it contains a constant set of names. The structure initialization is analogous to earlier ones - the definition is followed by a list of initializers enclosed in braces. The initializers are listed in pairs corresponding to the structure members
+- We use an array of structs below, and initialize it when it is defined as it contains a constant set of names. The structure initialization is analogous to earlier ones - the definition is followed by a list of initializers enclosed in braces. The initializers are listed in pairs corresponding to the structure members
  
 Struct array declared like any other type array.
+
 ```c
 #include <stdio.h>
  
@@ -626,7 +635,8 @@ int main()
 ```
 
 #### KEYWORD COUNTING
-Main routine reads the input by repeatedly calling a function getword that fetches one word at a time. Each word is looked up in the keytab struct through the binary search function. The list of keywords must be sorted in increasing order in the table.
+- Main routine reads the input by repeatedly calling a function getword that fetches one word at a time. Each word is looked up in the keytab struct through the binary search function. The list of keywords must be sorted in increasing order in the table.
+
 ```c
 #include <stdio.h>
 #include <ctype.h>
