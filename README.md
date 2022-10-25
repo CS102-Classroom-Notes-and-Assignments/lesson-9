@@ -191,10 +191,10 @@ int mygetline(char s[], int lim)
 
 ## BASICS OF STRUCTURES
 Structure - is a collection of one or more variables, possible of different types, grouped together under a single name for convenient handling.
-	- Structures help organize complicated data, particularly in large programs, because they permit a group of related variables to be treated as a unit instead of separate entities
-	- Examples: 
-		- payroll record for an employee, can have a struct with attributes name, address, social security number, salary, etc. Each one of these attributes can be a struct too as ‘name’ has attributes such as first and last.
-		- A point is a pair of coordinates, a rectangle is a pair of points, etc.
+- Structures help organize complicated data, particularly in large programs, because they permit a group of related variables to be treated as a unit instead of separate entities
+- Examples: 
+	- payroll record for an employee, can have a struct with attributes: name, address, social security number, salary, etc. Each one of these attributes can be a struct too as ‘name’ has attributes such as first and last.
+	- A point is a pair of coordinates, a rectangle is a pair of points, etc.
 ```c
 struct point {
 	int x;
@@ -203,16 +203,20 @@ struct point {
 ```
 
 #### Structure components:
-	- The keyword struct introduces a structure declaration, which is a list of declarations enclosed in braces.
-	- An optional name called a structure tag may follow the word struct (such as point in the example above). 
-	- The variables named in a structure are called members.
+- The keyword struct introduces a structure declaration, which is a list of declarations enclosed in braces.
+- An optional name called a structure tag may follow the word struct (such as point in the example above). 
+- The variables named in a structure are called members.
 
 A structure declaration that is not followed by a list of variables reserves no storage; it merely describes a template or shape of a structure. If the declaration is tagged, the tag can be used later in definitions of instances of the structure.
+```c
 struct point pt;
+```
 Defines a variable pt which is a structure of type struct point.
 
 The structure can be initialized by following its definition with a list of initializers, each a constant expression, for the members:
+```c
 struct maxpt = {320, 200};
+```
 
 #### POINT EXAMPLE
 - Structs basically allow you to create your own complex type.
@@ -240,7 +244,7 @@ int main()
 ```
 
 #### RECTANGLE EXAMPLE
-	- Shows us that structures can be nested
+- Shows us that structures can be nested
 ```c
 #include <stdio.h>
 
@@ -269,7 +273,7 @@ int main()
 }
 ```
 
-#### STRUCTURES AND FUNCTIONS
+## STRUCTURES AND FUNCTIONS
 The only legal operations on a structure are:
 1. copying it
 2. assigning to it as a unit
@@ -325,8 +329,8 @@ int main()
 ```
 
 #### RECT FUNCTIONS
-	- Note the #define for min and max
-	- Canonicalization = making consistent
+- Note the #define for min and max
+- Canonicalization = making consistent
 ```c
 #include <stdio.h>
 #include <math.h>
