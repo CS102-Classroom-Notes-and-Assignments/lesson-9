@@ -702,7 +702,7 @@ void ungetch(int c) // push character back on input
 	- We can interchange this based on the type of sort we want
 2. Exchange function - reverses order of any pair
 	- We can interchange this based on the object we are comparing
-3. Sorter - compares and echanges until the objects are in order
+3. Sorter - compares and exchanges until the objects are in order
 
 If we wanted to switch out the comparison function based on the command line arguments, we can use a pointer to the different functions.
 
