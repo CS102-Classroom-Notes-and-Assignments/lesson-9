@@ -106,9 +106,9 @@ int mygetline(char s[], int lim)
 	- Optional arguments should be permitted in any order. Furthermore, it is convenient for users if optional arguments can be combined as in: ```-nx```
 - In the program below, notice that ```*argv``` points to the pattern. ```*++argv``` is a pointer to an argument string, so ```(*++argv)[0]``` is its first character. An alternate valid form would be ```**++argv```. Brackets[] have higher precedence, so ```*++argv[0]v``` is a different expression that walks along a specific argument string. ```*++argv[0]``` is the same as ```*++(argv[0])```.
 
-<img src="pic2.png" width="400">
+<img src="pic2.png" width="600">
 
-<img src="pic3.png" width="400">
+<img src="pic3.png" width="600">
 
 ```c
 #include <stdio.h>
