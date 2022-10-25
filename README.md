@@ -187,92 +187,7 @@ int mygetline(char s[], int lim)
 }
 ```
 
-## Pointers to Functions
-- Function is not a variable, but it is possible to define pointers to functions, which can be assigned, placed in arrays, passed to functions, returned by functions, and so on.
 
-#### Sorting algo:
-1. Comparison function - determines ordering of any pair
-	- We can interchange this based on the type of sort we want
-2. Exchange function - reverses order of any pair
-	- We can interchange this based on the object we are comparing
-3. Sorter - compares and echanges until the objects are in order
-
-If we wanted to switch out the comparison function based on the command line arguments, we can use a pointer to the different functions.
-
-In the example below, we are interchanging a number comparison and a string comparison. Any pointer can be cast to ```(void *)``` and back again without loss of information, so we can call qsort by casting arguments to void *. The elaborate cast of the function argument casts the arguments of the comparison function. These will generally have no effect on actual representation, but assure the compiler that all is well. 
-- ```int (*comp) (void*, void*)``` says that comp is a pointer to a function that has two void * arguments and returns an int. The parentheses are important as if we wrote ```int *comp(void*, void *)``` it means comp is a function returning a pointer to an ```int```.
-```c
-#include <stdio.h>
-#include <string.h>
-
-#define MAXLINE 5000 	//max #lines to be sorted
-char *lineptr[MAXLINES];	// pointers to text line
-
-int readlines(char *lineptr[], int nlines);
-void writelines(char *lineptr[], int nlines);
-
-void qsort(void *lineptr[], int left, int right, int (*comp)(void *, void *));
-int numcmp(char *, char *);
-
-//sort input lines
-main(int argc, char *argv[]){
-	int nlines;		// number of input lines read
-	int numeric = 0;	// 1 if numeric sort
-
-	if (argc >1 && strcmp(argv[1], “-n”) == 0)
-		numeric =1;
-	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-	   qsort((void **) lineptr, 0, nlines-1, ( int (*)(void*, void*)) (numeric ? numcmp : strcmp));
-	   writelines(lineptr, nlines);
-	   return 0;
-	} else {
-	   printf(“input too big to sort\n”);
-	   return 1;
-	}
-}
-
-// qsort: sort v[left] … v[right] into increasing order
-void qsort(void *v[], int left, int right, int (*comp)(void*, void *)) {
-	int i, last;
-	void swap(void *v[], int, int);
-	
-	if (left >= right)		// do nothing if array contains fewer than 2 elements
-		return;
-	swap(v, left, (left, right)/2);
-	last = left;
-	for (i = left+1; i <= right; i++)
-		if ((*comp) (v[i], v[left]) < 0)
-			swap(v, ++last, i);
-	swap(v, left, last);
-	qsort(v, left, last-1, comp);
-	qsort(v, last+1, right, comp);
-}
-
-
-#include <stdlib.h>
-
-//numcmp compares s1 and s2 numerically
-int numcmp(char *s1, char *s2){
-	double v1, v2;
-	
-	v1 = atof(s1);
-	v2 = atof(s2);
-	if (v1 < v2)
-		return -1;
-	else if (v1 >v2)
-		return 1;
-	else
-		return 0;
-}
-
-void swap(void *v[], int i, int j;){
-	void * temp;
-		
-	temp = v[i];
-	v[i] = v[j];
-	V[j] = temp;
-}
-```
 
 ## BASICS OF STRUCTURES
 Structure - is a collection of one or more variables, possible of different types, grouped together under a single name for convenient handling.
@@ -767,6 +682,93 @@ void ungetch(int c) // push character back on input
         printf("ungetch: too many caracters\n");
     else
         buf[bufp++] = c;
+}
+```
+
+## Pointers to Functions
+- Function is not a variable, but it is possible to define pointers to functions, which can be assigned, placed in arrays, passed to functions, returned by functions, and so on.
+
+#### Sorting algo:
+1. Comparison function - determines ordering of any pair
+	- We can interchange this based on the type of sort we want
+2. Exchange function - reverses order of any pair
+	- We can interchange this based on the object we are comparing
+3. Sorter - compares and echanges until the objects are in order
+
+If we wanted to switch out the comparison function based on the command line arguments, we can use a pointer to the different functions.
+
+In the example below, we are interchanging a number comparison and a string comparison. Any pointer can be cast to ```(void *)``` and back again without loss of information, so we can call qsort by casting arguments to void *. The elaborate cast of the function argument casts the arguments of the comparison function. These will generally have no effect on actual representation, but assure the compiler that all is well. 
+- ```int (*comp) (void*, void*)``` says that comp is a pointer to a function that has two void * arguments and returns an int. The parentheses are important as if we wrote ```int *comp(void*, void *)``` it means comp is a function returning a pointer to an ```int```.
+```c
+#include <stdio.h>
+#include <string.h>
+
+#define MAXLINE 5000 	//max #lines to be sorted
+char *lineptr[MAXLINES];	// pointers to text line
+
+int readlines(char *lineptr[], int nlines);
+void writelines(char *lineptr[], int nlines);
+
+void qsort(void *lineptr[], int left, int right, int (*comp)(void *, void *));
+int numcmp(char *, char *);
+
+//sort input lines
+main(int argc, char *argv[]){
+	int nlines;		// number of input lines read
+	int numeric = 0;	// 1 if numeric sort
+
+	if (argc >1 && strcmp(argv[1], “-n”) == 0)
+		numeric =1;
+	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
+	   qsort((void **) lineptr, 0, nlines-1, ( int (*)(void*, void*)) (numeric ? numcmp : strcmp));
+	   writelines(lineptr, nlines);
+	   return 0;
+	} else {
+	   printf(“input too big to sort\n”);
+	   return 1;
+	}
+}
+
+// qsort: sort v[left] … v[right] into increasing order
+void qsort(void *v[], int left, int right, int (*comp)(void*, void *)) {
+	int i, last;
+	void swap(void *v[], int, int);
+	
+	if (left >= right)		// do nothing if array contains fewer than 2 elements
+		return;
+	swap(v, left, (left, right)/2);
+	last = left;
+	for (i = left+1; i <= right; i++)
+		if ((*comp) (v[i], v[left]) < 0)
+			swap(v, ++last, i);
+	swap(v, left, last);
+	qsort(v, left, last-1, comp);
+	qsort(v, last+1, right, comp);
+}
+
+
+#include <stdlib.h>
+
+//numcmp compares s1 and s2 numerically
+int numcmp(char *s1, char *s2){
+	double v1, v2;
+	
+	v1 = atof(s1);
+	v2 = atof(s2);
+	if (v1 < v2)
+		return -1;
+	else if (v1 >v2)
+		return 1;
+	else
+		return 0;
+}
+
+void swap(void *v[], int i, int j;){
+	void * temp;
+		
+	temp = v[i];
+	v[i] = v[j];
+	V[j] = temp;
 }
 ```
 
