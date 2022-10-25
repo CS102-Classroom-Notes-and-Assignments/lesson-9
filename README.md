@@ -767,6 +767,6 @@ void ungetch(int c) // push character back on input
 ```
 
 # Homework
-The C Programming Language, 2nd Edition - Kerninghan & Ritchie
-Chapter 5.10-5.11, 6.1-6.3
+- The C Programming Language, 2nd Edition - Kerninghan & Ritchie, Chapter 5.10-5.11, 6.1-6.3
+- hw link: https://classroom.github.com/a/DHpw75vn
 
