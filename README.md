@@ -459,14 +459,18 @@ int main()
 ```
  
 #### STRUCT POINTER PRECEDENCE
-The structure operators . and ->, together with () for function calls and [ ] for subscripts, are at the top of the precedence hierarchy and thus bind very tightly. So for the declaration 
+The structure operators ```.``` and ```->```, together with ```()``` for function calls and ```[ ]``` for subscripts, are at the **top of the precedence** hierarchy and thus bind very tightly. So for the declaration: 
 ```c
 struct {
 int len;
 char *str;
 } *p;
 ```
-Then, ```++p -> len``` increments ```len```, not ```p```, because the implied parenthesization is ```++(p->len)```. In the same way, ```*p->str``` fetches whatever str points to; v*p->str++``` increments str after accessing whatever it points to (just like ```*s++```); ```(*p->str)++``` increments whatever ```str``` points to; and ```*p++->str``` increments ```p``` after accessing whatever ```str``` points to.
+Then, ```++p -> len``` increments ```len```, not ```p```, because the implied parenthesization is ```++(p->len)```. 
+- In the same way, ```*p->str``` fetches whatever ```str``` points to; 
+- ```*p->str++``` increments ```str``` after accessing whatever it points to (just like ```*s++```); 
+- ```(*p->str)++``` increments whatever ```str``` points to; 
+- ```*p++->str``` increments ```p``` after accessing whatever ```str``` points to.
 ```c
 #include <stdio.h>
  
@@ -510,8 +514,9 @@ int main()
 
 ## ARRAYS OF STRUCTURES
  Program to count the occurrences of each C keyword:
-	- What data do we need to store?
-	- How should we store this data?
+- What data do we need to store?
+- How should we store this data?
+
 Perhaps as a struct like shown below?
 
 ```c
